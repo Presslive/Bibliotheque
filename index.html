@@ -1,0 +1,46 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Bibliotheque</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Ajouter un livre </h1>
+        <form action="" id="book-form">
+            <div class="inputs">
+                <label for="titre"></label>
+                <input type="text" id="titre">
+            </div>
+            <div class="inputs">
+                <label for="auteur"></label>
+                <input type="text" id="auteur">
+            </div>
+            <div class="inputs">
+                <label for="annee"></label>
+                <input type="text" id="annee">
+            </div>
+            </form>
+            <hr>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Auteur</th>
+                        <th>Année</th>
+
+                    </tr>
+                </thead>
+                <tbody id="book-lists">
+
+                </tbody>
+            </table>
+    </div>
+
+    <script src="./app.js"></script>
+</body>
+</html>
