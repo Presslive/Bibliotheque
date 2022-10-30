@@ -1,70 +1,149 @@
-/*constructeur */
-
+// book constructor
 function Book(titre, auteur, annee) {
     this.titre = titre;
     this.auteur = auteur;
     this.annee = annee;
 }
 
-//UI constructeur 
 
+// UI constructor 
 function UI() {
 
 }
 
-// Montrer alerte
 
-    UI.prototype.showAlert = function(message, className) {
-        //cree Div
-        const div= document.createElement('div');
-        // ajouter une class
-        div.className = `alert ${className}`;
+// ajout du livre à la liste
 
-        // ajouter du texte
-        div.appendChild(document.createTextNode(message));
+UI.prototype.addBookToList = function (book) {
 
-        // prendre le parent
-        const container = document.querySelector('.container');
-        // prendre le forms
-        const form = document.querySelector('#book-form')
+    const list = document.getElementById('book-list');
 
-        // inserer l'alerte
-        container.insertBefore(div, form);
+    // creer un élement tr
+    const row = document.createElement('tr');
 
-        // timeout pour faire partir la div 2s
-        setTimeout(() => {
-            document.querySelector('.alert').remove();
-        }, 2500);
-    }
-//Event listener pour ajouter livre / erreur/ succes
 
-document.getElementById('book-form').addEventListener('submit', function(e){
+    // creer le contenu du tr
 
-//On prend toutes les valeurs 
-const titre = document.getElementById('titre').value;
-const auteur = document.getElementById('auteur').value;
-const annee = document.getElementById('annee').value;
+    row.innerHTML = `
+    <td>${book.titre}</td>
+    <td>${book.auteur}</td>
+    <td>${book.annee}</td>
+    <td><a href="#" class="delete">X</a></td>
+    `;
 
-// instaancier un nouveau book
+    list.appendChild(row);
 
-const book = new Book(titre, auteur, annee);
-
-// instacier UI
-
-const ui = new UI();
-
-// validation
-if(titre ==='' || auteur ===''|| annee ==='') {
-    ui.showAlert('Remplisser les champs', 'error')
-} else {
-    // Ajout du livre dans le tableau
-    ui.addBookToList(book);
-
-    //succes
-    ui.showAlert('Livre ajoute', 'success');
-
-    // clear fields
-    ui.clearFields();
 }
-e.preventDefault();
+
+
+// Nettoyer les champs
+UI.prototype.clearFields = function () {
+    document.getElementById('titre').value = '';
+    document.getElementById('auteur').value = '';
+    document.getElementById('annee').value = '';
+}
+
+
+
+
+
+// Montrez alerte
+UI.prototype.showAlert = function (message, className) {
+
+    // Creer div
+    const div = document.createElement('div');
+    // ajoute une classe
+    div.className = `alert ${className}`;
+    // ajout du texte
+    div.appendChild(document.createTextNode(message));
+    // prendre le parent
+    const container = document.querySelector('.container');
+    // Prend le form
+    const form = document.querySelector('#book-form');
+    // Insérer notre alerte
+    container.insertBefore(div, form);
+
+    // Timeout pour faire partir la div 3s
+    setTimeout(function () {
+        document.querySelector('.alert').remove();
+    }, 3000);
+
+}
+
+
+
+
+
+// Delete book
+UI.prototype.deleteBook = function (target) {
+
+    if (target.className === 'delete') {
+
+        target.parentElement.parentElement.remove();
+
+    }
+}
+
+
+
+
+
+
+
+// Event listener pour ajouter livre / erreur / succès
+
+document.getElementById('book-form').addEventListener('submit', function (e) {
+
+
+    // on prends toutes les valeurs
+    const titre = document.getElementById('titre').value,
+        auteur = document.getElementById('auteur').value,
+        annee = document.getElementById('annee').value
+
+    // instancier un nouveau book
+    const book = new Book(titre, auteur, annee);
+
+    // instancier un nouvel ui
+    const ui = new UI();
+
+    // validation
+    if (titre === '' || auteur === '' || annee === '') {
+
+        ui.showAlert('Remplissez les champs!', 'error');
+
+    } else {
+
+        // ajout du livre dans la liste
+        ui.addBookToList(book);
+
+        // Succès 
+        ui.showAlert('Livre ajouté', 'success');
+
+        // clear fields
+        ui.clearFields();
+
+    }
+
+
+    e.preventDefault();
+});
+
+
+
+// Évenement pour supprimer les lignes
+
+document.getElementById('book-list').addEventListener('click', function (e) {
+
+
+
+    // instancier UI
+    const ui = new UI();
+    // Effacer le livre
+    ui.deleteBook(e.target);
+    // montrer un message de succès
+    ui.showAlert('Livre enlevé avec succès !', 'success');
+
+
+
+    e.preventDefault();
 });

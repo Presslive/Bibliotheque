@@ -1,46 +1,64 @@
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Book List</title>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css">
-    <title>Bibliotheque</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
+
     <div class="container">
-        <h1>Ajouter un livre </h1>
-        <form action="" id="book-form">
+        <h1>Ajoutez un livre !</h1>
+        <form id="book-form">
+
             <div class="inputs">
-                <label for="titre"></label>
+                <label for="titre">Titre</label>
                 <input type="text" id="titre">
             </div>
+
             <div class="inputs">
-                <label for="auteur"></label>
+                <label for="auteur">Auteur</label>
                 <input type="text" id="auteur">
             </div>
+
             <div class="inputs">
-                <label for="annee"></label>
+                <label for="annee">Annee</label>
                 <input type="text" id="annee">
             </div>
-            </form>
-            <hr>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th>Titre</th>
-                        <th>Auteur</th>
-                        <th>Année</th>
+            <div class="inputs">
+                <input type="submit" id="submit" value="Soumettre">
+            </div>
 
-                    </tr>
-                </thead>
-                <tbody id="book-lists">
 
-                </tbody>
-            </table>
+        </form>
+        <hr>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Auteur</th>
+                    <th>Année</th>
+                </tr>
+            </thead>
+            <tbody id="book-list">
+
+
+                
+            </tbody>
+        </table>
+
+
     </div>
 
-    <script src="./app.js"></script>
+
+    <script src="app.js"></script>
 </body>
+
 </html>
